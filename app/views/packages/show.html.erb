@@ -1,0 +1,19 @@
+<h1> Package <%= @package.id %>: <%= @package.name %> </h1>
+
+<div>
+  <h2>TO</h2>
+  <div class="address">
+    <% @package.to_address.full_address_lines.each do |line| %>
+      <%= line %><br/>
+    <% end %>
+  </div>
+</div>
+
+<div>
+  <h2>FROM</h2>
+  <div class="address">
+    <% @package.from_address.full_address_lines.each do |line| %>
+      <%= line %><br/>
+    <% end %>
+  </div>
+</div>

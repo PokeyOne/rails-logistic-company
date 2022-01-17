@@ -7,6 +7,7 @@ class Address < ApplicationRecord
   #   country
   #   region
   #   postal_code
+  has_many :packages
 
   # TODO: Validate that none of the address fields are blank
   validates :line_one, presence: true, length: { maximum: 255 }, allow_blank: false
@@ -27,11 +28,11 @@ class Address < ApplicationRecord
   #   Somewhere, CA 90210
   #   USA
   #
-  # @return [String] the full address over three or four lines
-  def full_address_string
+  # @return [[String]] the full address over three or four lines as an array
+  def full_address_lines
     addr_lines = [line_one]
     addr_lines << line_two unless line_two.blank?
-
-    "#{addr_lines.join("\n")}\n#{city}, #{region}, #{postal_code}\n#{country.upcase}"
+    addr_lines << "#{city}, #{region} #{postal_code}"
+    addr_lines << country.upcase
   end
 end

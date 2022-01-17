@@ -11,8 +11,8 @@
     <tr>
       <td><%= package.id %></td>
       <td><%= package.name %></td>
-      <td><%= package.from_address %></td>
-      <td><%= package.to_address %></td>
+      <td><%= package.from_address.one_liner %></td>
+      <td><%= package.to_address.one_liner %></td>
     </tr>
   <% end %>
 </table>
