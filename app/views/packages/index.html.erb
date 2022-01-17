@@ -4,11 +4,15 @@
   <tr>
     <th>ID</th>
     <th>Name</th>
+    <th>From Address</th>
+    <th>To Address</th>
   </tr>
   <% @packages.each do |package| %>
     <tr>
       <td><%= package.id %></td>
       <td><%= package.name %></td>
+      <td><%= package.from_address %></td>
+      <td><%= package.to_address %></td>
     </tr>
   <% end %>
 </table>
