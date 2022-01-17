@@ -1,0 +1,8 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+main_st:
+  line_one: "123 Main St"
+  line_two: Suite 101
+  country: CANADA
+  region: BC
+  postal_code: A1B2C3

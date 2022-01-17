@@ -10,12 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_17_210701) do
+ActiveRecord::Schema.define(version: 2022_01_17_214455) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "line_one"
+    t.string "line_two"
+    t.string "city"
+    t.string "country"
+    t.string "region"
+    t.string "postal_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "packages", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "to_address_id"
+    t.integer "from_address_id"
+    t.index ["from_address_id"], name: "index_packages_on_from_address_id"
+    t.index ["to_address_id"], name: "index_packages_on_to_address_id"
   end
 
+  add_foreign_key "packages", "addresses", column: "from_address_id"
+  add_foreign_key "packages", "addresses", column: "to_address_id"
 end
