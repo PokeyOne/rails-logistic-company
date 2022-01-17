@@ -7,7 +7,11 @@ out by the [Shopify Backend Developer Intern Challenge](https://docs.google.com/
 
 ## Technologies
 The whole thing is a Rails application built on Rails 7 with
-a MySQL database.
+a MySQL database. Main versions listed below:
+- Rails 7.0.1
+- MySql 14.14
+- Node 16.13.0
+- Yarn 1.22.10
 
 ## Running from Source
 ```Rust
