@@ -1,0 +1,14 @@
+<h1>Packages</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+  <% @packages.each do |package| %>
+    <tr>
+      <td><%= package.id %></td>
+      <td><%= package.name %></td>
+    </tr>
+  <% end %>
+</table>
