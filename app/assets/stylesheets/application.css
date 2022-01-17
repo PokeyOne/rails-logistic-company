@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+.address {
+  color: #999;
+}
+
+.address-container {
+  font-size: 1em;
+  display: inline-block;
+  margin-right: 1em;
+}
