@@ -16,7 +16,9 @@ class Address < ApplicationRecord
   #
   # @return [String] the address as a single lined string
   def one_liner
-    "#{line_one}, #{line_two}, #{city}, #{region}, #{postal_code}, #{country}"
+    addr = "#{line_one}"
+    addr << ", #{line_two}" unless line_two.blank?
+    "#{addr}, #{city}, #{region}, #{postal_code}, #{country}"
   end
 
   # The full address over three or four lines. Three lines if line two is empty,
