@@ -106,3 +106,13 @@ a {
 .button-blue a {
   color: #fff;
 }
+
+.code {
+  font-family: monospace;
+  font-size: 1em;
+  background-color: #eee;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  white-space: pre;
+}

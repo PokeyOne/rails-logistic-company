@@ -12,4 +12,14 @@ class Package < ApplicationRecord
   belongs_to :to_address, class_name: "Address"
 
   validates :state, presence: true, inclusion: { in: STATES }
+
+  # Convert the package to CSV format as a single row.
+  def to_csv
+    "#{name},#{state},\"#{from_address.one_liner}\",\"#{to_address.one_liner}\"\n"
+  end
+
+  # The header row for the CSV file.
+  def self.csv_header
+    "name,state,from_address,to_address\n"
+  end
 end
