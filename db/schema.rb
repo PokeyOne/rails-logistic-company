@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_17_214455) do
+ActiveRecord::Schema.define(version: 2022_01_18_025450) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "line_one"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_214455) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "to_address_id"
     t.integer "from_address_id"
+    t.string "state", default: "information_recieved", null: false
     t.index ["from_address_id"], name: "index_packages_on_from_address_id"
     t.index ["to_address_id"], name: "index_packages_on_to_address_id"
   end

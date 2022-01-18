@@ -1,0 +1,70 @@
+<%= form_with model: package do |form| %>
+  <div>
+    <%= form.label :name %><br/>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <b>Destination Address</b><br/>
+    <table>
+      <tr>
+        <td>Line 1</td>
+        <td><%= form.text_field :to_address_line_one %></td>
+      </tr>
+      <tr>
+        <td>Line 2</td>
+        <td><%= form.text_field :to_address_line_two %></td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td><%= form.text_field :to_address_city %></td>
+      </tr>
+      <tr>
+        <td>State/Province/Region</td>
+        <td><%= form.text_field :to_address_region %></td>
+      </tr>
+      <tr>
+        <td>Postal Code or Zip Code</td>
+        <td><%= form.text_field :to_address_postal_code %></td>
+      </tr>
+      <tr>
+        <td>Country</td>
+        <td><%= form.text_field :to_address_country %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <b>Origin Address</b><br/>
+    <table>
+      <tr>
+        <td>Line 1</td>
+        <td><%= form.text_field :from_address_line_one %></td>
+      </tr>
+      <tr>
+        <td>Line 2</td>
+        <td><%= form.text_field :from_address_line_two %></td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td><%= form.text_field :from_address_city %></td>
+      </tr>
+      <tr>
+        <td>State/Province/Region</td>
+        <td><%= form.text_field :from_address_region %></td>
+      </tr>
+      <tr>
+        <td>Postal Code or Zip Code</td>
+        <td><%= form.text_field :from_address_postal_code %></td>
+      </tr>
+      <tr>
+        <td>Country</td>
+        <td><%= form.text_field :from_address_country %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

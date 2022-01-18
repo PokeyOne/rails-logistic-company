@@ -49,6 +49,52 @@ class PackagesController < ApplicationController
     end
   end
 
+  def edit
+    @package = Package.find(params[:id])
+  end
+
+  def update
+    @package = Package.find(params[:id])
+
+    params = package_params
+
+    unless @package.to_address.update(
+      line_one: params.delete(:to_address_line_one),
+      line_two: params.delete(:to_address_line_two),
+      city: params.delete(:to_address_city),
+      country: params.delete(:to_address_country),
+      region: params.delete(:to_address_region),
+      postal_code: params.delete(:to_address_postal_code)
+    )
+      render :edit, status: :unprocessable_entity
+      return
+    end
+
+    unless @package.from_address.update(
+      line_one: params.delete(:from_address_line_one),
+      line_two: params.delete(:from_address_line_two),
+      city: params.delete(:from_address_city),
+      country: params.delete(:from_address_country),
+      region: params.delete(:from_address_region),
+      postal_code: params.delete(:from_address_postal_code)
+    )
+      render :edit, status: :unprocessable_entity
+      return
+    end
+
+    if @package.update(params)
+      redirect_to @package
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @package = Package.find(params[:id])
+    @package.destroy
+    redirect_to packages_path
+  end
+
   private
 
   # The accepted parameters for creating a package
