@@ -101,6 +101,7 @@ class PackagesController < ApplicationController
   def package_params
     params.require(:package).permit(
       :name,
+      :state,
       :from_address_line_one,
       :from_address_line_two,
       :from_address_city,

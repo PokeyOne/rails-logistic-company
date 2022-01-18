@@ -65,6 +65,11 @@
   </div>
 
   <div>
+    <b>State</b>
+    <%= form.select :state, Package::STATES %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
