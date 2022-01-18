@@ -1,18 +1,23 @@
 <h1>Packages</h1>
 
-<table>
-  <tr>
+<table class="package-list">
+  <tr class="package-list-header package-list-row">
     <th>ID</th>
     <th>Name</th>
     <th>From Address</th>
     <th>To Address</th>
   </tr>
   <% @packages.each do |package| %>
-    <tr>
-      <td><%= package.id %></td>
-      <td><%= package.name %></td>
-      <td><%= package.from_address.one_liner %></td>
-      <td><%= package.to_address.one_liner %></td>
+    <tr class="package-list-row">
+      <td class="package-list-data"><%= package.id %></td>
+      <td class="package-list-data"><%= package.name %></td>
+      <td class="package-list-data"><%= package.from_address.one_liner %></td>
+      <td class="package-list-data"><%= package.to_address.one_liner %></td>
     </tr>
   <% end %>
 </table>
+
+<div class="button button-blue">
+  Create New Package
+  <% link_to "Create New Package", new_package_path %>
+</div>
