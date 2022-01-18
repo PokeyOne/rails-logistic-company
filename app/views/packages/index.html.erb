@@ -25,7 +25,7 @@
   <% @packages.each do |package| %>
     <tr class="package-list-row">
       <td class="package-list-data"><%= package.id %></td>
-      <td class="package-list-data"><%= package.name %></td>
+      <td class="package-list-data"><%= link_to package.name, package_path(package) %></td>
       <td class="package-list-data"><%= package.from_address.one_liner %></td>
       <td class="package-list-data"><%= package.to_address.one_liner %></td>
       <td class="package-list-data"><%= package.state %></td>
