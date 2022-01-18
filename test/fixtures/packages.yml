@@ -2,4 +2,8 @@
 
 # Simple package with best-case scenario data
 basic_package:
+  id: 1
   name: "Test Package"
+  to_address_id: 1
+  from_address_id: 2
+  state: "in_transit"

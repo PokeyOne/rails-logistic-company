@@ -9,8 +9,12 @@ class Address < ApplicationRecord
   #   postal_code
   has_many :packages
 
-  # TODO: Validate that none of the address fields are blank
-  validates :line_one, presence: true, length: { maximum: 255 }, allow_blank: false
+  validates :line_one, presence: true, length: { maximum: 255, minimum: 1 }
+  validates :line_two, length: { maximum: 255, minimum: 0 }
+  validates :city, presence: true, length: { maximum: 255, minimum: 1 }
+  validates :country, presence: true, length: { maximum: 255, minimum: 1 }
+  validates :region, length: { maximum: 255, minimum: 0 }
+  validates :postal_code, length: { maximum: 255, minimum: 0 }
 
   # The address as a single lined string
   #

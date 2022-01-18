@@ -1,8 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 main_st:
+  id: 1
   line_one: "123 Main St"
   line_two: Suite 101
   country: CANADA
   region: BC
   postal_code: A1B2C3
+off_st:
+  id: 2
+  line_one: "321 Naim St"
+  line_two: Unit 203
+  country: SCOTLAND
+  region: NONE
+  postal_code: X9Y8Z7
