@@ -18,7 +18,7 @@ To run this project there are few prerequisites.
 
 ### Prerequisites
 1. Make sure ruby 3.1.0 is installed. If you already have a version of Ruby installed, this can be done with `rbenv install 3.1.0`, if not, consult the Ruby website
-1. Ensure sqlite is installed on your system. Many modern systems, such as macOS ship with this installed. Verify with `sqlite --version`
+1. Ensure sqlite is installed on your system. Many modern systems, such as macOS ship with this installed. Verify with `sqlite3 --version` or similar.
 1. Node should be installed. This project was built using 16.13; your experience with other versions may vary. Verify with `node --version`
 1. Yarn should be installed. Try `yarn --version`
 
