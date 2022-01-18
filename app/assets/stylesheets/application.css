@@ -76,6 +76,7 @@ h2 {
   border: 1px solid #ccc;
   border-radius: 0.5em;
   cursor: pointer;
+  display: inline-block;
 }
 
 .button-blue {
