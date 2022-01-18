@@ -1,5 +1,10 @@
 <h1>Packages</h1>
 
+<div class="button button-blue">
+  Create New Package
+  <% link_to "Create New Package", new_package_path %>
+</div>
+
 <table class="package-list">
   <tr class="package-list-header package-list-row">
     <th>ID</th>
@@ -16,8 +21,3 @@
     </tr>
   <% end %>
 </table>
-
-<div class="button button-blue">
-  Create New Package
-  <% link_to "Create New Package", new_package_path %>
-</div>
