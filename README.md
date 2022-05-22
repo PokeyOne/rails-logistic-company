@@ -2,8 +2,6 @@
 
 ![gpl 3 badge](https://img.shields.io/badge/license-GPL%203.0-blue)
 
-*rust version coming soon*
-
 This project is a simple inventory tracking application for a logistics company, as layed
 out by the [Shopify Backend Developer Intern Challenge](https://docs.google.com/document/d/1z9LZ_kZBUbg-O2MhZVVSqTmvDko5IJWHtuFmIu_Xg1A/edit).
 
@@ -46,4 +44,4 @@ For the challenge I also had to implement one of a list of features. The one I
 chose was the ability to export data as CSV file, which you can do by hitting
 the "Export Data" button.
 
-That's hit. Best of luck.
+That's it. Best of luck.
