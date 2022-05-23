@@ -7,7 +7,7 @@ out by the [Shopify Backend Developer Intern Challenge Summer 2022](https://docs
 
 ## Technologies
 The whole thing is a Rails application built on Rails 7 with
-a MySQL database. Main versions listed below:
+a Sqlite database. Main versions listed below:
 - Rails 7.0.1
 - Sqlite 3
 - Node 16.13.0

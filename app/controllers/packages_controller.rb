@@ -9,44 +9,12 @@ class PackagesController < ApplicationController
 
   def new
     @package = Package.new
+    @package.to_address = Address.new
+    @package.from_address = Address.new
   end
 
   def create
-    params = package_params
-
-    to_address = Address.new(
-      line_one: params.delete(:to_address_line_one),
-      line_two: params.delete(:to_address_line_two),
-      city: params.delete(:to_address_city),
-      country: params.delete(:to_address_country),
-      region: params.delete(:to_address_region),
-      postal_code: params.delete(:to_address_postal_code)
-    )
-    unless to_address.save
-      render :new, status: :unprocessable_entity
-      return
-    end
-
-    from_address = Address.new(
-      line_one: params.delete(:from_address_line_one),
-      line_two: params.delete(:from_address_line_two),
-      city: params.delete(:from_address_city),
-      country: params.delete(:from_address_country),
-      region: params.delete(:from_address_region),
-      postal_code: params.delete(:from_address_postal_code)
-    )
-    unless from_address.save
-      render :new, status: :unprocessable_entity
-      return
-    end
-
-    @package = Package.new(params.merge(to_address_id: to_address.id, from_address_id: from_address.id))
-
-    if @package.save
-      redirect_to @package
-    else
-      render :new, status: :unprocessable_entity
-    end
+    upsert :new, "Package #{params[:package][:name]} created"
   end
 
   def edit
@@ -54,42 +22,28 @@ class PackagesController < ApplicationController
   end
 
   def update
-    @package = Package.find(params[:id])
+    upsert :edit
+  end
 
+  def upsert(after, notice = nil)
     params = package_params
 
-    unless @package.to_address.update(
-      line_one: params.delete(:to_address_line_one),
-      line_two: params.delete(:to_address_line_two),
-      city: params.delete(:to_address_city),
-      country: params.delete(:to_address_country),
-      region: params.delete(:to_address_region),
-      postal_code: params.delete(:to_address_postal_code)
-    )
-      render :edit, status: :unprocessable_entity
-      return
-    end
+    to_address = Address.find_or_initialize_by(params.delete(:to_address_attributes))
+    from_address = Address.find_or_initialize_by(params.delete(:from_address_attributes))
 
-    unless @package.from_address.update(
-      line_one: params.delete(:from_address_line_one),
-      line_two: params.delete(:from_address_line_two),
-      city: params.delete(:from_address_city),
-      country: params.delete(:from_address_country),
-      region: params.delete(:from_address_region),
-      postal_code: params.delete(:from_address_postal_code)
-    )
-      render :edit, status: :unprocessable_entity
-      return
-    end
+    @package = Package.find_or_initialize_by(params)
+    @package.to_address = to_address
+    @package.from_address = from_address
 
-    if @package.update(params)
-      redirect_to @package
+    if @package.save
+      redirect_to @package, notice: notice
     else
-      render :edit, status: :unprocessable_entity
+      render after, status: :unprocessable_entity
     end
   end
 
   def destroy
+    flash[:notice] = "Package #{params[:id]} deleted"
     @package = Package.find(params[:id])
     @package.destroy
     redirect_to packages_path
@@ -102,18 +56,12 @@ class PackagesController < ApplicationController
     params.require(:package).permit(
       :name,
       :state,
-      :from_address_line_one,
-      :from_address_line_two,
-      :from_address_city,
-      :from_address_country,
-      :from_address_region,
-      :from_address_postal_code,
-      :to_address_line_one,
-      :to_address_line_two,
-      :to_address_city,
-      :to_address_country,
-      :to_address_region,
-      :to_address_postal_code
+      from_address_attributes: address_params,
+      to_address_attributes: address_params
     )
+  end
+
+  def address_params
+    %i[line_one line_two city country region postal_code]
   end
 end

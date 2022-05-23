@@ -7,7 +7,8 @@ class Address < ApplicationRecord
   #   country
   #   region
   #   postal_code
-  has_many :packages
+  has_many :packages_from, class_name: "Package", foreign_key: :from_address_id
+  has_many :packages_to, class_name: "Package", foreign_key: :to_address_id
 
   validates :line_one, presence: true, length: { maximum: 255, minimum: 1 }
   validates :line_two, length: { maximum: 255, minimum: 0 }
@@ -40,5 +41,15 @@ class Address < ApplicationRecord
     addr_lines << line_two unless line_two.blank?
     addr_lines << "#{city}, #{region} #{postal_code}"
     addr_lines << country.upcase
+  end
+
+  ##
+  # Shortcut for all packages to and from this address.
+  #
+  # In most cases this method **is not needed**, and instead the relations
+  # :packages_from and :packages_to should be used.
+  ##
+  def all_packages
+    Package.where("to_address_id = ? OR from_address_id = ?", id, id)
   end
 end

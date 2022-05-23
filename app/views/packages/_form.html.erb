@@ -4,64 +4,26 @@
     <%= form.text_field :name %>
   </div>
 
+  <% if package.errors.any? %>
+    <div>
+      <% package.errors.full_messages.each do |msg| %>
+        <p style="color: red;"><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
   <div>
     <b>Destination Address</b><br/>
-    <table>
-      <tr>
-        <td>Line 1</td>
-        <td><%= form.text_field :to_address_line_one, value: package.to_address&.line_one %></td>
-      </tr>
-      <tr>
-        <td>Line 2</td>
-        <td><%= form.text_field :to_address_line_two, value: package.to_address&.line_two %></td>
-      </tr>
-      <tr>
-        <td>City</td>
-        <td><%= form.text_field :to_address_city, value: package.to_address&.city %></td>
-      </tr>
-      <tr>
-        <td>State/Province/Region</td>
-        <td><%= form.text_field :to_address_region, value: package.to_address&.region %></td>
-      </tr>
-      <tr>
-        <td>Postal Code or Zip Code</td>
-        <td><%= form.text_field :to_address_postal_code, value: package.to_address&.postal_code %></td>
-      </tr>
-      <tr>
-        <td>Country</td>
-        <td><%= form.text_field :to_address_country, value: package.to_address&.country %></td>
-      </tr>
-    </table>
+    <%= form.fields_for :to_address do |sub_form| %>
+      <% render "address_form", form: sub_form, address: package&.to_address %>
+    <% end %>
   </div>
 
   <div>
     <b>Origin Address</b><br/>
-    <table>
-      <tr>
-        <td>Line 1</td>
-        <td><%= form.text_field :from_address_line_one, value: package.from_address&.line_one %></td>
-      </tr>
-      <tr>
-        <td>Line 2</td>
-        <td><%= form.text_field :from_address_line_two, value: package.from_address&.line_two %></td>
-      </tr>
-      <tr>
-        <td>City</td>
-        <td><%= form.text_field :from_address_city, value: package.from_address&.city %></td>
-      </tr>
-      <tr>
-        <td>State/Province/Region</td>
-        <td><%= form.text_field :from_address_region, value: package.from_address&.region %></td>
-      </tr>
-      <tr>
-        <td>Postal Code or Zip Code</td>
-        <td><%= form.text_field :from_address_postal_code, value: package.from_address&.postal_code %></td>
-      </tr>
-      <tr>
-        <td>Country</td>
-        <td><%= form.text_field :from_address_country, value: package.from_address&.country %></td>
-      </tr>
-    </table>
+    <%= form.fields_for :from_address do |sub_form| %>
+      <% render "address_form", form: sub_form, address: package&.from_address %>
+    <% end %>
   </div>
 
   <div>

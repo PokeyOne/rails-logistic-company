@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <td>Line 1</td>
+    <td><%= form.text_field :line_one, value: address&.line_one %></td>
+  </tr>
+  <tr>
+    <td>Line 2</td>
+    <td><%= form.text_field :line_two, value: address&.line_two %></td>
+  </tr>
+  <tr>
+    <td>City</td>
+    <td><%= form.text_field :city, value: address&.city %></td>
+  </tr>
+  <tr>
+    <td>State/Province/Region</td>
+    <td><%= form.text_field :region, value: address&.region %></td>
+  </tr>
+  <tr>
+    <td>Postal Code or Zip Code</td>
+    <td><%= form.text_field :postal_code, value: address&.postal_code %></td>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td><%= form.text_field :country, value: address&.country %></td>
+  </tr>
+</table>
