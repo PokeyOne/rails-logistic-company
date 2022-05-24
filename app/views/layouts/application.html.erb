@@ -11,15 +11,32 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="font-sans">
     <% flash.each do |type, msg| %>
-      <div>
-        <%= type %>
-        <%= msg %>
-      </div>
+      <% if type == "error" %>
+        <div class="bg-rose-200 p-4 border-b-2 border-b-rose-300 text-rose-800">
+          <span class="uppercase pr-4 border-r-2 border-r-rose-800 mr-4"><%= type %></span>
+          <span><%= msg %></span>
+        </div>
+      <% elsif type == "alert" %>
+        <div class="bg-amber-200 p-4 border-b-2 border-b-amber-300 text-amber-800">
+          <span class="uppercase pr-4 border-r-2 border-r-amber-800 mr-4"><%= type %></span>
+          <span><%= msg %></span>
+        </div>
+      <% else %>
+        <div class="bg-lime-200 p-4 border-b-2 border-b-lime-300 text-lime-800">
+          <span class="uppercase pr-4 border-r-2 border-r-lime-800 mr-4"><%= type %></span>
+          <span><%= msg %></span>
+        </div>
+      <% end %>
     <% end %>
 
-    <a href="/">Home</a>
-    <%= yield %>
+    <div class="p-4 border-b border-b-slate-500 mb-4 px-32">
+      <a href="/" class="text-sky-500 font-bold underline">Home</a>
+    </div>
+
+    <div id="main-content" class="px-4 container mx-auto">
+      <%= yield %>
+    </div>
   </body>
 </html>

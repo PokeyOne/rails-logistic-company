@@ -1,9 +1,4 @@
 <%= form_with model: package do |form| %>
-  <div>
-    <%= form.label :name %><br/>
-    <%= form.text_field :name %>
-  </div>
-
   <% if package.errors.any? %>
     <div>
       <% package.errors.full_messages.each do |msg| %>
@@ -13,25 +8,32 @@
   <% end %>
 
   <div>
-    <b>Destination Address</b><br/>
-    <%= form.fields_for :to_address do |sub_form| %>
-      <% render "address_form", form: sub_form, address: package&.to_address %>
-    <% end %>
+    <%= form.label :name, "Package Name", class: "block pl-2 font-bold text-sm text-slate-600" %>
+    <%= form.text_field :name, class: "block rounded border-2 border-slate-300 w-full max-w-md" %>
   </div>
 
   <div>
-    <b>Origin Address</b><br/>
-    <%= form.fields_for :from_address do |sub_form| %>
-      <% render "address_form", form: sub_form, address: package&.from_address %>
-    <% end %>
+    <%= form.label :state, "Delivery Status", class: "block pl-2 font-bold text-sm text-slate-600" %>
+    <%= form.select :state, Package::STATES, {}, class: "block rounded border-2 border-slate-300 w-full max-w-md" %>
+  </div>
+
+  <div class="block md:flex md:max-w-2xl md:space-x-4">
+    <div class="block md:w-1/2">
+      <h2 class="text-2xl mt-8 mb-2 font-bold">Destination Address</h2>
+      <%= form.fields_for :to_address do |sub_form| %>
+        <% render "address_form", form: sub_form, address: package&.to_address %>
+      <% end %>
+    </div>
+
+    <div class="block md:w-1/2">
+      <h2 class="text-2xl mt-8 mb-2 font-bold">Origin Address</h2>
+      <%= form.fields_for :from_address do |sub_form| %>
+        <% render "address_form", form: sub_form, address: package&.from_address %>
+      <% end %>
+    </div>
   </div>
 
   <div>
-    <b>State</b>
-    <%= form.select :state, Package::STATES %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn-primary mt-4" %>
   </div>
 <% end %>

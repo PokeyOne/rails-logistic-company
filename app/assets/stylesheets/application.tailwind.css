@@ -11,3 +11,13 @@
 }
 
 */
+
+@layer components {
+    .btn-primary {
+        @apply rounded-md p-2 bg-sky-500 hover:bg-sky-600 text-sky-50 font-bold inline-block;
+    }
+
+    .btn-destructive {
+        @apply btn-primary bg-red-500 hover:bg-red-600
+    }
+}

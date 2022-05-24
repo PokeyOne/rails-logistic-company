@@ -22,7 +22,7 @@ class PackagesController < ApplicationController
   end
 
   def update
-    upsert :edit
+    upsert :edit, "Package #{params[:package][:name]} updated"
   end
 
   def upsert(after, notice = nil)
@@ -38,6 +38,7 @@ class PackagesController < ApplicationController
     if @package.save
       redirect_to @package, notice: notice
     else
+      flash[:error] = "Could not create a package with the information supplied."
       render after, status: :unprocessable_entity
     end
   end

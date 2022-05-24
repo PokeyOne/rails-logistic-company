@@ -1,26 +1,24 @@
-<table>
-  <tr>
-    <td>Line 1</td>
-    <td><%= form.text_field :line_one, value: address&.line_one %></td>
-  </tr>
-  <tr>
-    <td>Line 2</td>
-    <td><%= form.text_field :line_two, value: address&.line_two %></td>
-  </tr>
-  <tr>
-    <td>City</td>
-    <td><%= form.text_field :city, value: address&.city %></td>
-  </tr>
-  <tr>
-    <td>State/Province/Region</td>
-    <td><%= form.text_field :region, value: address&.region %></td>
-  </tr>
-  <tr>
-    <td>Postal Code or Zip Code</td>
-    <td><%= form.text_field :postal_code, value: address&.postal_code %></td>
-  </tr>
-  <tr>
-    <td>Country</td>
-    <td><%= form.text_field :country, value: address&.country %></td>
-  </tr>
-</table>
+<div>
+  <%= form.label :line_one, "Address Line 1", class: "block pl-2 font-bold text-sm text-slate-600" %>
+  <%= form.text_field :line_one, value: address&.line_one, class: "block rounded border-2 border-slate-300 w-full max-w-md" %>
+</div>
+<div>
+  <%= form.label :line_two, "Line 2", class: "block pl-2 font-bold text-sm text-slate-600" %>
+  <%= form.text_field :line_two, value: address&.line_two, class: "block rounded border-2 border-slate-300 w-full max-w-md" %>
+</div>
+<div>
+  <%= form.label :city, "City", class: "block pl-2 font-bold text-sm text-slate-600" %>
+  <%= form.text_field :city, value: address&.city, class: "block rounded border-2 border-slate-300 w-full max-w-md" %>
+</div>
+<div>
+  <%= form.label :region, "State/Province/Region", class: "block pl-2 font-bold text-sm text-slate-600" %>
+  <%= form.text_field :region, value: address&.region, class: "block rounded border-2 border-slate-300 w-full max-w-md" %>
+</div>
+<div>
+  <%= form.label :postal_code, "Postal Code or Zip Code", class: "block pl-2 font-bold text-sm text-slate-600" %>
+  <%= form.text_field :postal_code, value: address&.postal_code, class: "block rounded border-2 border-slate-300 w-full max-w-md" %>
+</div>
+<div>
+  <%= form.label :country, "Country", class: "block pl-2 font-bold text-sm text-slate-600" %>
+  <%= form.text_field :country, value: address&.country, class: "block rounded border-2 border-slate-300 w-full max-w-md" %>
+</div>

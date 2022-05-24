@@ -1,5 +1,7 @@
 # A stored address
 class Address < ApplicationRecord
+  # TODO: A name field should be added to the address model.
+
   # fields:
   #   line_one
   #   line_two
