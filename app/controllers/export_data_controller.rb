@@ -6,7 +6,7 @@ class ExportDataController < ApplicationController
     csv_string = ""
 
     csv_string += Package.csv_header
-    Package.all.each do |package|
+    Package.find_each do |package|
       csv_string += package.to_csv
     end
 
