@@ -8,13 +8,13 @@
   <% end %>
 
   <div>
-    <%= form.label :name, "Package Name", class: "block pl-2 font-bold text-sm text-slate-600" %>
-    <%= form.text_field :name, class: "block rounded border-2 border-slate-300 w-full max-w-md" %>
+    <%= form.label :name, "Package Name", class: "input-label" %>
+    <%= form.text_field :name, class: "input-field" %>
   </div>
 
   <div>
-    <%= form.label :state, "Delivery Status", class: "block pl-2 font-bold text-sm text-slate-600" %>
-    <%= form.select :state, Package::STATES, {}, class: "block rounded border-2 border-slate-300 w-full max-w-md" %>
+    <%= form.label :state, "Delivery Status", class: "input-label" %>
+    <%= form.select :state, Package::STATES, {}, class: "input-field" %>
   </div>
 
   <div class="block md:flex md:max-w-2xl md:space-x-4">
