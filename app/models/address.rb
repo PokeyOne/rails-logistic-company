@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A stored address
 class Address < ApplicationRecord
   # TODO: A name field should be added to the address model.
@@ -23,8 +25,8 @@ class Address < ApplicationRecord
   #
   # @return [String] the address as a single lined string
   def one_liner
-    addr = "#{line_one}"
-    addr << ", #{line_two}" unless line_two.blank?
+    addr = line_one.to_s
+    addr << ", #{line_two}" if line_two.present?
     "#{addr}, #{city}, #{region}, #{postal_code}, #{country}"
   end
 
@@ -40,7 +42,7 @@ class Address < ApplicationRecord
   # @return [[String]] the full address over three or four lines as an array
   def full_address_lines
     addr_lines = [line_one]
-    addr_lines << line_two unless line_two.blank?
+    addr_lines << line_two if line_two.present?
     addr_lines << "#{city}, #{region} #{postal_code}"
     addr_lines << country.upcase
   end

@@ -1,0 +1,9 @@
+require: rubocop-rails
+
+AllCops:
+  Exclude:
+    - db/**
+    - bin/**
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

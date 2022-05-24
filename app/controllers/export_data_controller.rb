@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExportDataController < ApplicationController
   def index; end
 

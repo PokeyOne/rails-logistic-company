@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The base unit of the business. This represents everything that is shipped.
 class Package < ApplicationRecord
   STATES = %w[
