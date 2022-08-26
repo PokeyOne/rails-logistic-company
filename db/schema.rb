@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_18_025450) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_01_18_025450) do
   create_table "addresses", force: :cascade do |t|
     t.string "line_one"
     t.string "line_two"
@@ -19,14 +18,14 @@ ActiveRecord::Schema.define(version: 2022_01_18_025450) do
     t.string "country"
     t.string "region"
     t.string "postal_code"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "packages", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "to_address_id"
     t.integer "from_address_id"
     t.string "state", default: "information_recieved", null: false

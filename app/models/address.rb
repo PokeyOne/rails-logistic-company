@@ -1,7 +1,10 @@
+# typed: strict
 # frozen_string_literal: true
 
 # A stored address
 class Address < ApplicationRecord
+  extend T::Sig
+
   # TODO: A name field should be added to the address model.
 
   # fields:
@@ -24,6 +27,7 @@ class Address < ApplicationRecord
   # The address as a single lined string
   #
   # @return [String] the address as a single lined string
+  sig { returns(String) }
   def one_liner
     addr = line_one.to_s
     addr << ", #{line_two}" if line_two.present?
@@ -40,11 +44,14 @@ class Address < ApplicationRecord
   #   USA
   #
   # @return [[String]] the full address over three or four lines as an array
+  sig { returns(T::Array[String]) }
   def full_address_lines
-    addr_lines = [line_one]
-    addr_lines << line_two if line_two.present?
+    addr_lines = [line_one || ""]
+    addr_lines << T.must(line_two) if line_two.present?
     addr_lines << "#{city}, #{region} #{postal_code}"
-    addr_lines << country.upcase
+    addr_lines << T.must(country).upcase if country
+
+    addr_lines
   end
 
   ##
@@ -53,6 +60,7 @@ class Address < ApplicationRecord
   # In most cases this method **is not needed**, and instead the relations
   # :packages_from and :packages_to should be used.
   ##
+  sig { returns(ActiveRecord::Relation) }
   def all_packages
     Package.where("to_address_id = ? OR from_address_id = ?", id, id)
   end
