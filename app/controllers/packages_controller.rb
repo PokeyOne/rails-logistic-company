@@ -1,32 +1,48 @@
+# typed: strict
 # frozen_string_literal: true
 
 class PackagesController < ApplicationController
+  extend T::Sig
+
+  sig { void }
+  def initialize
+    @package = T.let(nil, T.nilable(Package))
+    @packages = T.let(nil, T.nilable(ActiveRecord::Relation))
+  end
+
+  sig { void }
   def index
     @packages = Package.all
   end
 
+  sig { void }
   def show
     @package = Package.find(params[:id])
   end
 
+  sig { void }
   def new
     @package = Package.new
     @package.to_address = Address.new
     @package.from_address = Address.new
   end
 
+  sig { void }
   def create
-    upsert :new, "Package #{params[:package][:name]} created"
+    upsert :new, "Package #{package_params[:name]} created"
   end
 
+  sig { void }
   def edit
     @package = Package.find(params[:id])
   end
 
+  sig { void }
   def update
-    upsert :edit, "Package #{params[:package][:name]} updated"
+    upsert :edit, "Package #{package_params[:name]} updated"
   end
 
+  sig { params(after: Symbol, notice: T.nilable(String)).void }
   def upsert(after, notice = nil)
     params = package_params
 
@@ -45,6 +61,7 @@ class PackagesController < ApplicationController
     end
   end
 
+  sig { void }
   def destroy
     flash[:notice] = "Package #{params[:id]} deleted"
     @package = Package.find(params[:id])
@@ -55,8 +72,9 @@ class PackagesController < ApplicationController
   private
 
   # The accepted parameters for creating a package
+  sig { returns(ActionController::Parameters) }
   def package_params
-    params.require(:package).permit(
+    T.cast(params.require(:package), ActionController::Parameters).permit(
       :name,
       :state,
       from_address_attributes: address_params,
@@ -64,6 +82,7 @@ class PackagesController < ApplicationController
     )
   end
 
+  sig { returns(T::Array[Symbol]) }
   def address_params
     %i[line_one line_two city country region postal_code]
   end

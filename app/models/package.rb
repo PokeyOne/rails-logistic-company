@@ -1,14 +1,17 @@
+# typed: strict
 # frozen_string_literal: true
 
 # The base unit of the business. This represents everything that is shipped.
 class Package < ApplicationRecord
-  STATES = %w[
+  extend T::Sig
+
+  STATES = T.let(%w[
     information_recieved
     in_transit
     delivered
     returned
     cancelled
-  ].freeze
+  ].freeze, T::Array[String])
 
   # These hooks are here so that if this is the only package that references
   # an address, the address is deleted.
@@ -34,12 +37,21 @@ class Package < ApplicationRecord
   # TODO: Have an updates object so a package can be tracked to different
   #       locations.
 
+  sig { void }
+  def initialize
+    @from_address = T.let(nil, T.nilable(Address))
+    @to_address = T.let(nil, T.nilable(Address))
+    super
+  end
+
   # Convert the package to CSV format as a single row.
+  sig { returns(String) }
   def to_csv
-    "#{id},#{name},#{state},\"#{from_address.one_liner}\",\"#{to_address.one_liner}\"\n"
+    "#{id},#{name},#{state},\"#{from_address&.one_liner}\",\"#{to_address&.one_liner}\"\n"
   end
 
   # The header row for the CSV file.
+  sig { returns(String) }
   def self.csv_header
     "id,name,state,from_address,to_address\n"
   end
@@ -50,14 +62,16 @@ class Package < ApplicationRecord
   #
   # This is done so that the addresses can be deleted after the package is
   # destroyed (if they don't have any packages).
+  sig { void }
   def stash_addresses_for_deletion
     @from_address = from_address
     @to_address = to_address
   end
 
   # Delete the addresses if they don't have any packages attached.
+  sig { void }
   def delete_addresses
-    @from_address.destroy if @from_address.all_packages.empty?
-    @to_address.destroy if @to_address.all_packages.empty?
+    @from_address&.destroy if @from_address&.all_packages&.empty?
+    @to_address&.destroy if @to_address&.all_packages&.empty?
   end
 end

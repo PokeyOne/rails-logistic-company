@@ -1,9 +1,14 @@
+# typed: strict
 # frozen_string_literal: true
 
 class ExportDataController < ApplicationController
+  extend T::Sig
+
+  sig { void }
   def index; end
 
   # TODO: Accept a date range and export all packages in that range.
+  sig { returns(T.untyped) }
   def download_csv
     csv_string = ""
 
